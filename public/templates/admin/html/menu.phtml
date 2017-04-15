@@ -1,0 +1,12 @@
+<div class="main-navigation navbar-collapse collapse">
+	<!-- start: MAIN MENU TOGGLER BUTTON -->
+	<div class="navigation-toggler">
+		<i class="clip-chevron-left"></i> <i class="clip-chevron-right"></i>
+	</div>
+    <?php        
+        $partial = array('_partials/navigation.phtml', 'admin');        
+        $this->navigation()->menu()->setPartial($partial);
+        
+        echo $this->navigation()->menu()->renderPartial(null, $partial);                     
+    ?>
+</div>

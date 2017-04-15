@@ -1,0 +1,134 @@
+<?php
+if (isset($this->popupMessage)) {
+    echo $this->popupMessage;
+}
+
+$arrInput = array(
+	0 => array('label' => 'Họ tên: ', 'input' => $this->form->nameVi, 'requited' => 'YES'),	
+	2 => array('label' => 'Chức vụ: ', 'input' => $this->form->regencyVi, 'requited' => 'YES'),	
+	4 => array('label' => 'Điện thoại: ', 'input' => $this->form->mobile, 'requited' => 'YES'),	
+	5 => array('label' => 'Fax: ', 'input' => $this->form->fax, 'requited' => 'YES'),	
+	6 => array('label' => 'Email: ', 'input' => $this->form->email, 'requited' => 'YES'),	
+	7 => array('label' => 'Yahoo: ', 'input' => $this->form->yahoo, 'requited' => 'YES'),	
+	8 => array('label' => 'Skype: ', 'input' => $this->form->skype, 'requited' => 'YES'),	
+	9 => array('label' => 'Thứ tự: ', 'input' => $this->form->weight, 'requited' => 'YES'),	
+	10 => array('label' => 'Hiển thị: ', 'input' => $this->form->status, 'requited' => 'YES'),
+	11 => array('label' => 'Hotline: ', 'input' => $this->form->hotline, 'requited' => 'YES'),
+);
+
+if (ENGLISH == 1) {
+	$arrInput[1] = array('label' => 'Họ tên (Tiếng anh): ', 'input' => $this->form->nameEn, 'requited' => 'YES');
+	$arrInput[3] = array('label' => 'Chức vụ (Tiếng anh): ', 'input' => $this->form->regencyEn, 'requited' => 'YES');
+}
+ksort($arrInput);
+?>
+
+<form role="form" class='form-horizontal' novalidate="novalidate" action='' method="post" enctype="multipart/form-data" onsubmit="return checkForm()">
+	<div class="row">
+		<div class="col-md-12">
+			<!-- start: FORM VALIDATION 1 PANEL -->
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<i class="icon-external-link-sign"></i>				
+				</div>
+				<div class="panel-body">
+					<div class="tabbable panel-tabs">
+						<ul class="nav nav-tabs">
+							<li class="active"><a data-toggle="tab" href="#panel_tab_example1">Thông tin chung</a>
+							</li>
+							
+						</ul>
+									
+						<div class="tab-content">
+							<div class="col-md-12">
+								<div id="alert-message"></div>							
+					            <?php if (isset($this->error) && $this->error != '') { ?>
+								<div class="errorHandler alert alert-danger">
+									<i class="icon-remove-sign"></i> Message
+									<ul>
+				                        <?php
+					                        foreach ($this->error as $item) {
+					                            echo '<li>' . $item . '</li>';
+					                        }
+				                        ?>
+				                    </ul>
+								</div>
+								<?php } ?>
+								
+								<div class="successHandler alert alert-success no-display">
+									<i class="icon-ok"></i> Your form validation is successful!
+								</div>
+							</div>
+							<div id="panel_tab_example1" class="tab-pane active">											
+								<?php echo $this->partialLoop("_partials/row.phtml", $arrInput); ?>  														
+							</div>
+						</div>
+					</div>					
+					
+					<div class="row">
+						<div class="col-md-12">
+							<div><hr></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-9">
+							<p>Fields with <span class="symbol required"></span> are required</p>
+						</div>
+						<div class="col-md-3">
+							<a data-style="expand-left" class="btn btn-teal ladda-button" href='<?php echo $this->url(array('module' => 'admin', 'controller' => $this->controllerName, 'action'=>'index')); ?>'>								
+								<i class="icon-circle-arrow-left"></i><span class="ladda-label"> Cancel </span>
+								<span class="ladda-spinner"></span>
+							</a>
+							<button type="submit" data-style="expand-right" name='btnSave' class="btn btn-teal ladda-button">
+								<span class="ladda-label"> Save </span>
+								<i class="icon-circle-arrow-right"></i>
+								<span class="ladda-spinner"></span>
+							</button>
+						</div>
+						
+					</div>					
+				</div>
+			</div>
+			<!-- end: FORM VALIDATION 1 PANEL -->
+		</div>
+	</div>
+</form>
+
+<script type="text/javascript">
+    $(document).ready(function() {   
+        $('.alert .close').live('click', function() {
+            $(this).parents('#alert-message').fadeOut();
+            $(this).parent('.alert').fadeOut();
+        });
+
+        $('#youtube').keyup(function() {
+            var value = $(this).val();
+            if (value != '') {
+                $(this).removeClass('required-error');
+            }
+        });
+
+    });
+
+    function checkForm() {
+        var error = true;
+        var stError = '';
+        if ($('#youtube').val() === null) {
+            stError += '<li>Chưa nhập link youtube</li>';
+            $('#youtube').addClass('required-error');
+            error = false;
+        } else {
+            $('#youtube').removeClass('required-error');
+        }
+        
+        
+        if (!error) {
+            $('.errorHandler').remove();
+            $('#alert-message').html('<div class="errorHandler alert alert-danger"><button data-dismiss="alert" class="close" type="button">×</button><i class="icon-remove-sign"></i> Message</div>');
+            $('.errorHandler').append('<ul>' + stError + '</ul>');
+            $('#alert-message').fadeIn();
+        }
+
+        return error;
+    }
+</script>

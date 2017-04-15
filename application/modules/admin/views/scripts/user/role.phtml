@@ -1,0 +1,77 @@
+<?php 
+$xhtml = '<select name="sl_status" id="sl_status" class="form-control" >';
+foreach ($this->role as $key => $info) {
+	$strSelect = '';
+	if ($info['id'] == $this->statusSelected) {
+		$strSelect = 'selected="selected"';
+	}
+	$xhtml .= '<option class="ui-tree0" value="' . $info['id'] . '" ' . $strSelect . '>' . $info['roleName'] . '</option>';
+}
+$xhtml .= '</select>';
+$role = $xhtml;
+?>
+
+<div class="row" style="float: left; margin-right: 10px; margin-left: 0px">
+	<form action="" method='POST'>
+		<div class="row-md-3" style="float: left; padding-right: 10px">
+			<div class="form-group">
+             	<?php
+					echo $role;
+				?>
+				</div>
+             </div>
+		<div class="row-md-1" style="float: left">
+			<div class="form-group">
+             	<input type="submit" class="form-control" value="Tìm kiếm" style="width: 96px"/>
+			</div>
+		</div>
+	</form>
+</div>
+<div class='toolbar' align="right">
+	
+</div>
+<div style="clear: both;"></div>
+<form role="form" class='form-horizontal' novalidate="novalidate" action='' method="post" enctype="multipart/form-data">
+<?php foreach ($this->arrResource as $k => $val) {
+	?>
+<div class="" style="float: left; padding: 5px;height: 200px;">
+	<div style="width: 310px; height: 173px">		
+		<div class="panel panel-default" style="height: 190px;">	
+			<div class="panel-heading">
+				<i class="icon-external-link-sign"></i> <?php echo $val[0]['detail'];?>
+				<div class="panel-tools">
+					<a class="btn btn-xs btn-link panel-collapse collapses" href="#"> </a> 
+					<a class="btn btn-xs btn-link panel-expand" href="#"> <i class="icon-resize-full"></i>
+					</a> <a class="btn btn-xs btn-link panel-close" href="#"> <i class="icon-remove"></i>
+					</a>
+				</div>
+			</div>
+			<div class="panel-body">
+						<?php foreach ($val as $key => $value){
+							?>
+							<input type="checkbox" name="arrResourceId[]" <?php echo (in_array($value['id'], $this->arrPrivileges)) ? "checked='checked'":'' ?> value="<?php echo $value['id'];?>"> <?php echo $value['resourceName']; ?><br/>
+						<?php } ?>
+			</div>
+		</div>
+		<!-- end: BASIC TABLE PANEL -->
+	</div>
+</div>
+<?php }?>
+<div style="clear: both;text-align: right;padding-right: 150px">
+	<input type="hidden" name="userId" value="<?php echo $this->UserId; ?>">
+	<button type="submit" data-style="expand-right" name='btnSave' class="btn btn-teal ladda-button">
+		<span class="ladda-label"> Save </span>
+		<i class="icon-circle-arrow-right"></i>
+		<span class="ladda-spinner"></span>
+	</button>
+</div>
+</form>
+<script type="text/javascript" language="javascript">
+    $(document).ready(function() {
+    	updateStatusClick('.status', "ajax-edit-feature/", 'status');
+    	updateStatusClick('.isDetailProduct', "ajax-edit-feature/", 'isDetailProduct');
+    	updateElementChange('.txtWeight', "ajax-edit-feature/", 'weight');
+    	removeElementClick('.delete-category', 'ajax-delete-feature/', 'REMOVE_ROW');
+    	removeAllClick('.delete-all-category', 'ajax-delete/', 'REMOVE_ALL');          
+    });
+</script>

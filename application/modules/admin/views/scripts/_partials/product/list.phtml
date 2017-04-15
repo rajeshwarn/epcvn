@@ -1,0 +1,40 @@
+<tr class="tblSkinRow">
+    <td align="center"><input type="checkbox" data-id='<?php echo $this->id;?>' class='checkbox'/></td>
+    <td align="center"><?php echo $this->id;?></td>
+    <td>
+    	<a title="<?php echo $this->titleVi; ?>" href="/admin/product/edit/id/<?php echo $this->id; ?>">
+            <img style='width:65px;height:45px;' class="img-pro" src="<?php echo UPLOAD_URL.'/products/'.PRODUCT_WIDTH_THUMBS . 'x' .PRODUCT_HEIGHT_THUMBS.'/'.$this->image;?>"/>
+        </a>
+    </td>
+    <td>
+        <a title="<?php echo $this->titleVi; ?>" href="/admin/product/edit/id/<?php echo $this->id; ?>"><?php echo $this->titleVi; ?></a>
+    </td>
+    <?php if (VIETNAM == 1) { ?>
+        <td>
+            <a title="<?php echo $this->titleEn; ?>" href="/admin/product/edit/id/<?php echo $this->id; ?>"><?php echo $this->titleEn; ?></a>
+        </td>
+    <?php } ?>
+ 
+    <td align="center">
+        <?php echo $this->CategoryNameVi ?>
+    </td>
+    
+    <td>
+    	<input name="" type="text" class='txtOrder' data-id="<?php echo $this->id; ?>" value="<?php echo $this->weight; ?>" style="width:80%;" />
+    </td>
+    <?php
+    if ($this->status == 1) {
+        echo '<td align="center"><div class="label label-sm label-success">Hoạt động</div></td>';
+    } else {
+        echo '<td align="center"><div class="label label-sm label-danger">Không hoạt động</div></td>';
+    }
+    ?>
+    <td align="center" style="width:100px;">
+        
+	<div class="visible-md visible-lg hidden-sm hidden-xs">
+		<a href="/admin/product/edit/id/<?php echo $this->id; ?>" data-original-title="Cập nhật" data-placement="top" class="btn btn-xs btn-teal tooltips" href="#"><i class="icon-edit"></i></a>
+		<a href="/admin/product/delete/id/<?php echo $this->id; ?>" data-original-title="Xóa" data-placement="top" class="btn btn-xs btn-bricky tooltips" data-id="<?php echo $this->id; ?>" onclick="return confirm('Bạn có muốn xóa không?')"><i class="icon-remove icon-white"></i></a>
+	</div>											
+    </td>
+
+</tr> 

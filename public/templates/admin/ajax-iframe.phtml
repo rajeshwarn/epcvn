@@ -1,0 +1,21 @@
+<?php echo $this->doctype()?>
+<head>
+        <?php echo $this->headTitle()?>
+        <!--[if IE]><meta http-equiv='X-UA-Compatible' content="IE=edge,IE=9,IE=8,chrome=1" /><![endif]-->
+        <?php echo $this->headMeta()?>
+        <?php echo $this->headLink() ?>	
+        <?php echo $this->headScript()?>
+        <script>
+			jQuery(document).ready(function() {
+				Main.init();
+				TableData.init();
+				//UIModals.init();
+				UITreeview.init();
+			});
+		</script>
+</head>
+<body>
+	<?php echo $this->layout()->content; ?> 
+	<div id="stack1" class="modal fade modal-overflow in" tabindex="-1" data-focus-on="input:first" style="display: none;" aria-hidden="false"></div>
+</body>
+</html>

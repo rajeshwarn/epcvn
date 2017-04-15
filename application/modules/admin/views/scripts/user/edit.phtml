@@ -1,0 +1,143 @@
+<?php
+if (isset($this->popupMessage)) {
+    echo $this->popupMessage;
+}
+$xhtml = '<select name="roleId" id="roleId" class="form-control" style="width:150px">';
+foreach ($this->role as $key => $info) {
+	$strSelect = '';
+	$xhtml .= '<option class="ui-tree0" value="' . $info['id'] . '" ' . $strSelect . '>' . $info['roleName'] . '</option>';
+}
+$xhtml .= '</select>';
+$role = $xhtml;
+$arrInput = array(
+    0 => array('label' => 'Username: ', 'input' => $this->form->userName, 'requited' => 'YES'),
+    1 => array('label' => 'Pasword: ', 'input' => $this->form->password, 'requited' => 'YES'),
+	2 => array('label' => 'Email: ', 'input' => $this->form->email, 'requited' => 'YES'),
+    3 => array('label' => 'Họ tên: ', 'input' =>  $this->form->fullname, 'requited' => 'NO'),
+	4 => array('label' => 'Hiển thị: ', 'input' => $this->form->status, 'requited' => 'NO'),
+	5 => array('label' => 'Nhóm quyền: ', 'input' => $role, 'requited' => 'NO')
+);
+ksort($arrInput);
+?>
+
+<form role="form" class='form-horizontal' novalidate="novalidate" action='' method="post" enctype="multipart/form-data" onsubmit="return checkForm()">
+	<div class="row">
+		<div class="col-md-12">
+			<!-- start: FORM VALIDATION 1 PANEL -->
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<i class="icon-external-link-sign"></i>				
+				</div>
+				<div class="panel-body">
+					<div class="tabbable panel-tabs">
+						<ul class="nav nav-tabs">
+							<li class="active"><a data-toggle="tab" href="#panel_tab_example1">Thông tin chung</a>
+							</li>					
+						</ul>
+									
+						<div class="tab-content">
+							<div class="col-md-12">
+								<div id="alert-message"></div>							
+					            <?php if (isset($this->error) && $this->error != '') { ?>
+								<div class="errorHandler alert alert-danger">
+									<i class="icon-remove-sign"></i> Message
+									<ul>
+				                        <?php
+					                        foreach ($this->error as $item) {
+					                            echo '<li>' . $item . '</li>';
+					                        }
+				                        ?>
+				                    </ul>
+								</div>
+								<?php } ?>
+								
+								<div class="successHandler alert alert-success no-display">
+									<i class="icon-ok"></i> Your form validation is successful!
+								</div>
+							</div>
+							<div id="panel_tab_example1" class="tab-pane active">											
+								<?php echo $this->partialLoop("_partials/row.phtml", $arrInput); ?>  														
+							</div>
+							<div id="panel_tab_example2" class="tab-pane">											
+								<div class="row">	
+									<div class="col-md-12" id='featureDetail'></div>
+								</div>
+								<div class="row">	
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="col-sm-2 control-label"></label>	
+											<div class="col-sm-9" id='image-attr'></div>											
+										</div>
+									</div>
+								</div> 														
+							</div>
+							
+						</div>
+					</div>					
+					
+					<div class="row">
+						<div class="col-md-12">
+							<div><hr></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-9">
+							<p>Fields with <span class="symbol required"></span> are required</p>
+						</div>
+						<div class="col-md-3">
+							<a data-style="expand-left" class="btn btn-teal ladda-button" href='<?php echo $this->url(array('module' => 'admin', 'controller' => $this->controllerName, 'action'=>'show-all')); ?>'>								
+								<i class="icon-circle-arrow-left"></i><span class="ladda-label"> Cancel </span>
+								<span class="ladda-spinner"></span>
+							</a>
+							<button type="submit" data-style="expand-right" name='btnSave' class="btn btn-teal ladda-button">
+								<span class="ladda-label"> Save </span>
+								<i class="icon-circle-arrow-right"></i>
+								<span class="ladda-spinner"></span>
+							</button>
+						</div>
+						
+					</div>					
+				</div>
+			</div>
+			<!-- end: FORM VALIDATION 1 PANEL -->
+		</div>
+	</div>
+</form>
+
+<script type="text/javascript">
+    
+    function checkForm() {
+        var error = true;
+        var stError = '';
+        if ($('#userName').val() === '') {
+            stError += '<li>UserName is not empty</li>';
+            $('#userName').addClass('required-error');
+            error = false;
+        } else {
+            $('#userName').removeClass('required-error');
+        }
+        if ($('#email').val() === '') {
+            stError += '<li>Email is not empty</li>';
+            $('#email').addClass('required-error');
+            error = false;
+        } else {
+            $('#email').removeClass('required-error');
+        }
+        if ($('#password').val() === '') {
+            stError += '<li>Password is not empty</li>';
+            $('#password').addClass('required-error');
+            error = false;
+        } else {
+            $('#password').removeClass('required-error');
+        }
+        
+        if (!error) {
+            $('.errorHandler').remove();
+            $('#alert-message').html('<div class="errorHandler alert alert-danger"><button data-dismiss="alert" class="close" type="button">×</button><i class="icon-remove-sign"></i> Message</div>');
+            $('.errorHandler').append('<ul>' + stError + '</ul>');
+            $('#alert-message').fadeIn();
+        }
+
+        return error;
+    }
+</script>

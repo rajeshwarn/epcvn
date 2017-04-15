@@ -1,0 +1,49 @@
+<?php 
+	$ssLang = new Zend_Session_Namespace('ssLang');	
+?>
+
+<div class='fontcontent'>
+	<div class='info-contact'>
+		<?php echo $this->page['content'.$ssLang->key];?>
+		<!-- 
+		<div class='company-name'><?php //echo $this->configs['company'.$ssLang->key];?></div>
+		<div class='form-group'>
+			<label class='col-label'><?php //echo $this->translate('ADDRESS')?>: </label>
+			<div class='col-input'><?php //echo $this->configs['address'.$ssLang->key];?></div>
+		</div>
+		<div class='form-group'>
+			<label class='col-label'><?php //echo $this->translate('TELEPHONE')?>: </label>
+			<div class='col-input'><?php //echo $this->configs['telephone'];?></div>
+		</div>
+		<div class='form-group'>
+			<label class='col-label'>FAX: </label>
+			<div class='col-input'><?php //echo $this->configs['fax'];?></div>
+		</div>
+		<div class='form-group'>
+			<label class='col-label'>Email: </label>
+			<div class='col-input'><?php //echo $this->configs['email'];?></div>
+		</div>
+		<div class='form-group'>
+			<label class='col-label'>Website: </label>
+			<div class='col-input'><?php //echo BASE_URL;?></div>
+		</div>
+		 -->
+	</div>
+	<hr style='border-top: 1px solid #CFCFCF;margin: 40px 0px;'>
+	<div id='map'></div>
+</div>
+<script type="text/javascript" language="javascript" src="http://maps.google.com/maps/api/js?sensor=false&v=3&language=fr"></script>
+<script type="text/javascript" language="javascript" src="<?php echo $this->jsUrl."/jquery.googlemap.js"; ?>"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+		jQuery("#map").loadMap({
+			search: "<?php echo $this -> configs["mapId"]; ?>",
+			zoom : 16,
+			infobulle: {
+				titre: "<font style='color:#0079D8; font-size:16px; font-weight:bold'><?php echo $this -> configs["company".$ssLang->key]; ?></font>",
+				adresse: "<font style='color:#036'><?php echo "<strong>Phone:</strong> ".$this -> configs["telephone"]."<br/><strong>Email:</strong> <a style='color:#036; text-decoration:none' href='mailto:".$this -> configs["email"]."'>".$this -> configs["email"]."</a><br/><strong>Website:</strong> ".BASE_URL; ?></font>"
+			}
+		});
+	});
+	
+</script>

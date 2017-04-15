@@ -1,0 +1,31 @@
+<?php
+echo '<ul class="main-navigation-menu">';
+foreach ($this->container as $page) {	
+    $isActive = $page->isActive(true);
+    $liClass = $isActive ? 'active open' : '';
+    $aHref = 'javascript:void(0)';
+    
+    if(!empty($page->module)){
+    	$aHref = $page->href;
+    }
+    
+    echo '<li class="'.$liClass.'">';
+    echo '<a href="'.$aHref.'"><i class="'.$page->class.'"></i>';
+    echo '<span class="title">'.$page->label.'</span><i class="icon-arrow"></i> <span class="selected"></span>';
+    echo '</a>';
+    
+    if (count($page->getPages())) {
+    	$subContainer = $page->getPages();
+		echo '<ul class="sub-menu">';
+    	foreach ($subContainer as $subPage) {    		
+    		$isSubActive = $subPage->isActive(true);
+    		$liSubClass = $isSubActive ? 'active' : '';    		
+    		echo '<li class="'.$liSubClass.'"><a href="'.$subPage->href.'"> <span class="title"> '.$subPage->label.'</span></a></li>';    		
+    	}
+		echo '</ul>';
+    }
+    echo '</li>';
+}
+echo '</ul>';
+
+?>

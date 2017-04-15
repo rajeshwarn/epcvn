@@ -1,0 +1,64 @@
+<?php echo $this->doctype()?>
+<!--[if IE 8]><html class="ie8 no-js" lang="en"><![endif]-->
+<!--[if IE 9]><html class="ie9 no-js" lang="en"><![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" class="no-js">
+<!--<![endif]-->
+<head>
+        <?php echo $this->headTitle()?>
+        <!--[if IE]><meta http-equiv='X-UA-Compatible' content="IE=edge,IE=9,IE=8,chrome=1" /><![endif]-->
+        <?php echo $this->headMeta()?>
+        <?php echo $this->headLink() ?>	
+        <?php echo $this->headScript()?>
+        <link href="<?php echo TEMPLATE_URL;?>/admin/images/favicon.ico" rel="shortcut icon">
+        <script>
+			jQuery(document).ready(function() {
+				Main.init();
+				TableData.init();
+				//UIModals.init();
+				UITreeview.init();
+			});
+		</script>
+</head>
+<body class="navigation-small">
+	<div class="navbar navbar-inverse navbar-fixed-top">
+        <?php echo $this->render('html/header.php'); ?>
+    </div>
+	<div class="main-container">
+		<div class="navbar-content">
+			<!-- start: SIDEBAR -->
+			<?php echo $this->render('html/menu.phtml'); ?>
+			<!-- end: SIDEBAR -->
+		</div>
+		<div class="main-content">
+			<!-- start: PANEL CONFIGURATION MODAL FORM -->
+			<div class="modal fade" id="panel-config" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">Panel Configuration</h4>
+						</div>
+						<div class="modal-body">Here will be a configuration form</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary">Save changes</button>
+						</div>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+			<!-- /.modal -->
+			<div class="container">
+				<?php echo $this->render('html/breadcrumb.phtml'); ?>
+				
+				<?php echo $this->layout()->content; ?> 
+			</div>
+		</div>
+        
+        <?php echo $this->render('html/footer.php'); ?>
+	</div>
+	<div id="ajax-modal" class="modal fade modal-overflow in" tabindex="-1" data-width="760" data-focus-on="input:first" style="display: none;" aria-hidden="false"></div>
+</body>
+</html>

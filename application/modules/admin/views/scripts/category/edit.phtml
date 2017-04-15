@@ -1,0 +1,164 @@
+<?php
+if (isset($this->popupMessage)) {
+    echo $this->popupMessage;
+}
+
+//$this->cmsSelects('categoryId', $this->data['parentId'], $this->data['parentId'], array('size' => 10, 'class' => 'categoryId form-control'), &$result);
+$categoryId = $this->cmsSelect('categoryId', $this->data['parentId'], $this->category, array('class'=>'form-control chzn-select'));
+
+$arrInput = array(
+    0 => array('label' => 'Tên danh mục: ', 'input' => $this->form->titleVi, 'requited' => 'YES'),
+    2 => array('label' => 'Alias: ', 'input' => $this->form->aliasVi, 'requited' => 'YES'),
+    4 => array('label' => 'Thuộc danh mục: ', 'input' => $categoryId, 'requited' => 'YES'),
+    5 => array('label' => 'Thứ tự hiển thị: ', 'input' => $this->form->weight, 'requited' => 'NO'),
+    6 => array('label' => 'Hiển thị: ', 'input' => $this->form->status, 'requited' => 'NO'),
+);
+
+if (ENGLISH == 1) {
+    $arrInput[1] = array('label' => 'Tên danh mục (Tiếng anh): ', 'input' => $this->form->titleEn, 'requited' => 'YES');
+    $arrInput[3] = array('label' => 'Alias (Tiếng anh): ', 'input' => $this->form->aliasEn, 'requited' => 'YES');
+}
+
+$arrInput2 = array(
+		0 => array('label' => 'Meta Title: ', 'input' => $this->form->metaTitle, 'requited' => 'NO'),
+		1 => array('label' => 'Meta Keyword: ', 'input' => $this->form->metaKeyword, 'requited' => 'NO'),
+		2 => array('label' => 'Meta Description: ', 'input' => $this->form->metaDescription, 'requited' => 'NO'),
+);
+
+ksort($arrInput);
+ksort($arrInput2);
+?>
+
+
+<form role="form" class="form-horizontal" action='' method="post" onsubmit="return checkForm()">
+	<div class="row">
+		<div class="col-md-12">
+			<!-- start: FORM VALIDATION 1 PANEL -->
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<i class="icon-external-link-sign"></i>				
+				</div>
+				<div class="panel-body">
+					<div class="tabbable panel-tabs">
+						<ul class="nav nav-tabs">
+							<li class="active"><a data-toggle="tab" href="#panel_tab_example1">Thông tin chung</a>
+							</li>
+							<li><a data-toggle="tab" href="#panel_tab_example2">Cấu hình SEO</a>
+							</li>							
+						</ul>
+									
+						<div class="tab-content">
+							<div class="col-md-12">
+								<div id="alert-message"></div>							
+					            <?php if (isset($this->error) && $this->error != '') { ?>
+								<div class="errorHandler alert alert-danger">
+									<i class="icon-remove-sign"></i> Thông báo
+									<ul>
+				                        <?php
+					                        foreach ($this->error as $item) {
+					                            echo '<li>' . $item . '</li>';
+					                        }
+				                        ?>
+				                    </ul>
+								</div>
+								<?php } ?>
+								
+								<div class="successHandler alert alert-success no-display">
+									<i class="icon-ok"></i> Your form validation is successful!
+								</div>
+							</div>
+							<div id="panel_tab_example1" class="tab-pane active">											
+								<?php echo $this->form->level; ?>
+			                    <?php echo $this->partialLoop("_partials/row.phtml", $arrInput); ?>  														
+							</div>
+							<div id="panel_tab_example2" class="tab-pane">
+								<?php echo $this->partialLoop("_partials/row.phtml", $arrInput2); ?> 
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div><hr></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-9">
+							<p>Các trường có dấu <span class="symbol required"></span> là bắt buộc</p>
+						</div>
+						<div class="col-md-3">
+							<a data-style="expand-left" class="btn btn-teal ladda-button" href='<?php echo $this->url(array('module' => 'admin', 'controller' => $this->controllName, 'action'=>'index')); ?>'>								
+								<i class="icon-circle-arrow-left"></i><span class="ladda-label"> Huỷ bỏ </span>
+								<span class="ladda-spinner"></span>
+							</a>
+							<button type="submit" data-style="expand-right" name='btnSave' class="btn btn-teal ladda-button">
+								<span class="ladda-label"> Lưu </span>
+								<i class="icon-circle-arrow-right"></i>
+								<span class="ladda-spinner"></span>
+							</button>
+						</div>
+						
+					</div>					
+				</div>
+			</div>
+			<!-- end: FORM VALIDATION 1 PANEL -->
+		</div>
+	</div>
+</form>
+
+<script>
+    $(document).ready(function() {
+    	standardURL('#titleVi', '#aliasVi');
+    	standardURL('#titleEn', '#aliasEn');
+
+        $('#categoryId').change(function() {
+            var level = $(this + 'option:selected').attr('data-level');
+            if ($(this)[0].selectedIndex === 0) {
+                level = 0;
+            }
+            
+            $('#level').val(parseInt(level) + 1);
+        });
+
+        $('.alert .close').live('click', function() {
+            $(this).parents('#alert-message').fadeOut();
+            $(this).parent('.alert').fadeOut();
+        });
+
+        $('#titleVi, #titleEn').keyup(function() {
+            var value = $(this).val();
+            if (value != '') {
+                $(this).removeClass('required-error');
+            }
+        });
+
+    });
+
+    function checkForm() {
+        var error = true;
+        var stError = '';
+
+        if ($('#titleVi').val() === '') {
+            stError += '<li>Chưa nhập tên danh mục</li>';
+            $('#titleVi').parent().addClass('has-error');
+            error = false;
+        } else {
+            $('#titleVi').parent().removeClass('has-error');
+        }
+        if ($('#titleEn').val() === '') {
+            stError += '<li>Chưa nhập tên danh mục (Tiếng anh)</li>';
+            $('#titleEn').parent().addClass('has-error');
+            error = false;
+        } else {
+            $('#titleEn').parent().removeClass('has-error');
+        }
+
+        if (!error) {
+            $('.errorHandler').remove();
+            $('#alert-message').html('<div class="errorHandler alert alert-danger"><button data-dismiss="alert" class="close" type="button">×</button><i class="icon-remove-sign"></i> Thông báo</div>');
+            $('.errorHandler').append('<ul>' + stError + '</ul>');
+            $('#alert-message').fadeIn();
+        }
+
+        return error;
+    }
+</script>

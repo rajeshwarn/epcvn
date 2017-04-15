@@ -1,0 +1,211 @@
+<?php
+if (isset($this->popupMessage)) {
+    echo $this->popupMessage;
+}
+
+$parentId = $this->formSelect('categoryId[]', null, array('size' => 10, 'class' => 'categoryIdProduct  form-control'), $this->category);
+$formCategory = '<div class="category-box catChild">'.$parentId.'</div>';
+$formImage = '<div class="fileupload fileupload-new" data-provides="fileupload">
+					<input type="hidden" value="" name="">
+					<div class="fileupload-new thumbnail no-image" style="width: 150px; height: 120px;">
+						<div class="fileupload-image"><i class="clip-image"></i></div>
+					</div>
+					<div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 150px; max-height: 120px; line-height: 10px;"></div>
+					<div>
+						<span class="btn btn-light-grey btn-file"><span class="fileupload-new"><i class="icon-picture"></i> Select image</span><span class="fileupload-exists"><i class="icon-picture"></i> Change</span>
+							<input type="file" name="image"/>
+						</span>
+						<a href="#" class="btn fileupload-exists btn-light-grey" data-dismiss="fileupload">
+							<i class="icon-remove"></i> Remove
+						</a>
+						<span style="color:red">Upload image size (198px x 144px)</span>
+					</div>
+				</div>';
+$contentVi = $this->cmsEditor($this->form->contentVi, 'contentVi');
+$contentEn = $this->cmsEditor($this->form->contentEn,'contentEn');
+
+$arrInput = array(
+	0 => array('label' => 'Danh mục: ', 'input' => $formCategory, 'requited' => 'YES'),	
+    /*1 => array('label' => 'Mã Loại bài viết: ', 'input' => $this->form->typeId, 'requited' => 'YES'),*/
+    1 => array('label' => 'Tên sản phẩm: ', 'input' => $this->form->titleVi, 'requited' => 'YES'),
+    3 => array('label' => 'Alias: ', 'input' => $this->form->aliasVi, 'requited' => 'YES'),
+    5 => array('label' => 'Nội dung tóm tắt: ', 'input' =>  $this->form->introVi, 'requited' => 'YES'),
+	7 => array('label' => 'Nội dung chi tiết: ', 'input' => $contentVi, 'requited' => 'Yes'),
+	9 => array('label' => 'Thứ tự: ', 'input' => $this->form->weight, 'requited' => 'NO'),
+	10 => array('label' => 'Hiển thị: ', 'input' => $this->form->status, 'requited' => 'NO'),
+	11 => array('label' => 'Sản phẩm mới: ', 'input' => $this->form->isNew, 'requited' => 'NO'),
+	12 => array('label' => 'Sản phẩm nổi bật: ', 'input' => $this->form->featured, 'requited' => 'NO'),
+	13 => array('label' => 'Hình ảnh: ', 'input' => $formImage, 'requited' => 'NO'),
+	
+);
+
+$arrInput2 = array(
+	0 => array('label' => 'Meta Title: ', 'input' => $this->form->metaTitle, 'requited' => 'NO'),
+	1 => array('label' => 'Meta Keyword: ', 'input' => $this->form->metaKeyword, 'requited' => 'NO'),
+	2 => array('label' => 'Meta Description: ', 'input' => $this->form->metaDescription, 'requited' => 'NO'),		
+);
+
+if (ENGLISH == 1) {
+    $arrInput[2] = array('label' => 'Tên sản phẩm (Tiếng anh): ', 'input' => $this->form->titleEn, 'requited' => 'YES');
+    $arrInput[4] = array('label' => 'Alias (Tiếng anh): ', 'input' => $this->form->aliasEn, 'requited' => 'YES');
+    $arrInput[6] = array('label' => 'Nội dung tóm tắt (Tiếng anh): ', 'input' => $this->form->introEn, 'requited' => 'YES');
+    $arrInput[8] = array('label' => 'Nội dung chi tiết (Tiếng anh): ', 'input' => $contentEn, 'requited' => 'NO');
+    //$arrInput[9] = array('label' => 'Nội dung chi tiết (Tiếng anh): ', 'input' => $contentEn, 'requited' => 'YES');
+}
+
+ksort($arrInput);
+ksort($arrInput2);
+?>
+
+<form role="form" class='form-horizontal' novalidate="novalidate" action='' method="post" enctype="multipart/form-data" onsubmit="return checkForm()">
+	<div class="row">
+		<div class="col-md-12">
+			<!-- start: FORM VALIDATION 1 PANEL -->
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<i class="icon-external-link-sign"></i>				
+				</div>
+				<div class="panel-body">
+					<div class="tabbable panel-tabs">
+						<ul class="nav nav-tabs">
+							<li class="active"><a data-toggle="tab" href="#panel_tab_example1">Thông tin chung</a>
+							</li>
+							
+							<li><a data-toggle="tab" href="#panel_tab_example3">Cấu hình SEO</a>
+							</li>							
+						</ul>
+									
+						<div class="tab-content">
+							<div class="col-md-12">
+								<div id="alert-message"></div>							
+					            <?php if (isset($this->error) && $this->error != '') { ?>
+								<div class="errorHandler alert alert-danger">
+									<i class="icon-remove-sign"></i> Message
+									<ul>
+				                        <?php
+					                        foreach ($this->error as $item) {
+					                            echo '<li>' . $item . '</li>';
+					                        }
+				                        ?>
+				                    </ul>
+								</div>
+								<?php } ?>
+								
+								<div class="successHandler alert alert-success no-display">
+									<i class="icon-ok"></i> Your form validation is successful!
+								</div>
+							</div>
+							<div id="panel_tab_example1" class="tab-pane active">											
+								<?php echo $this->partialLoop("_partials/row.phtml", $arrInput); ?>  														
+							</div>
+							<div id="panel_tab_example2" class="tab-pane">											
+								<div class="row">	
+									<div class="col-md-12" id='featureDetail'></div>
+								</div>
+								<div class="row">	
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="col-sm-2 control-label"></label>	
+											<div class="col-sm-9" id='image-attr'></div>											
+										</div>
+									</div>
+								</div> 														
+							</div>
+							<div id="panel_tab_example3" class="tab-pane">
+								<?php echo $this->partialLoop("_partials/row.phtml", $arrInput2); ?> 
+							</div>
+						</div>
+					</div>					
+					
+					<div class="row">
+						<div class="col-md-12">
+							<div><hr></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-9">
+							<p>Fields with <span class="symbol required"></span> are required</p>
+						</div>
+						<div class="col-md-3">
+							<a data-style="expand-left" class="btn btn-teal ladda-button" href='<?php echo $this->url(array('module' => 'admin', 'controller' => $this->controllerName, 'action'=>'index')); ?>'>								
+								<i class="icon-circle-arrow-left"></i><span class="ladda-label"> Cancel </span>
+								<span class="ladda-spinner"></span>
+							</a>
+							<button type="submit" data-style="expand-right" name='btnSave' class="btn btn-teal ladda-button">
+								<span class="ladda-label"> Save </span>
+								<i class="icon-circle-arrow-right"></i>
+								<span class="ladda-spinner"></span>
+							</button>
+						</div>
+						
+					</div>					
+				</div>
+			</div>
+			<!-- end: FORM VALIDATION 1 PANEL -->
+		</div>
+	</div>
+</form>
+
+<script type="text/javascript">
+    $(document).ready(function() {   
+    	standardURL('#titleVi', '#aliasVi');
+    	standardURL('#titleEn', '#aliasEn');
+     
+        $('#parentId').change(function() {
+            var level = $(this + 'option:selected').attr('data-level');
+            if ($(this)[0].selectedIndex === 0) {
+                level = 0;
+            }
+
+            $('#level').val(parseInt(level) + 1);
+        });
+
+        $('.alert .close').live('click', function() {
+            $(this).parents('#alert-message').fadeOut();
+            $(this).parent('.alert').fadeOut();
+        });
+
+        $('#categoryId, #titleVi, #titleEn').keyup(function() {
+            var value = $(this).val();
+            if (value != '') {
+                $(this).removeClass('required-error');
+            }
+        });
+
+    });
+
+    function checkForm() {
+        var error = true;
+        var stError = '';
+        if ($('#categoryId').val() === null) {
+            stError += '<li>Chưa chọn danh mục sản phẩm</li>';
+            $('#categoryId').addClass('required-error');
+            error = false;
+        } else {
+            $('#categoryId').removeClass('required-error');
+        }
+        if ($('#titleVi').val() === '') {
+            stError += '<li>Chưa nhập tên sản phẩm</li>';
+            $('#titleVi').addClass('required-error');
+            error = false;
+        } else {
+            $('#titleVi').removeClass('required-error');
+        }
+        if ($('#titleEn').val() === '') {
+            stError += '<li>Chưa nhập tên sản phẩm (Tiếng anh)</li>';
+            $('#titleEn').addClass('required-error');
+            error = false;
+        } else {
+            $('#titleEn').removeClass('required-error');
+        }
+        
+        if (!error) {
+            $('.errorHandler').remove();
+            $('#alert-message').html('<div class="errorHandler alert alert-danger"><button data-dismiss="alert" class="close" type="button">×</button><i class="icon-remove-sign"></i> Message</div>');
+            $('.errorHandler').append('<ul>' + stError + '</ul>');
+            $('#alert-message').fadeIn();
+        }
+
+        return error;
+    }
+</script>

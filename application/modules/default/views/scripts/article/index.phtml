@@ -1,0 +1,142 @@
+<script type="text/javascript">
+var google_tag_params = {
+local_id: 'REPLACE_WITH_VALUE',
+local_pagetype: 'REPLACE_WITH_VALUE',
+local_totalvalue: 'REPLACE_WITH_VALUE',
+};
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 995415630;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/995415630/?value=0&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+<?php 
+$ssLang = new Zend_Session_Namespace('ssLang'); 
+$filter = new Zend_Filter();
+$multiFilter = $filter->addFilter(new My_Filter_RemoveCircumflex())
+						->addFilter(new Zend_Filter_StringToLower(array('encoding' => 'UTF-8')))
+						->addFilter(new Zend_Filter_Alnum(true))
+						->addFilter(new Zend_Filter_PregReplace(array('match' => '#\s+#', 'replace' => '-')))
+						->addFilter(new Zend_Filter_Word_SeparatorToDash());
+
+$filterSubString = new My_Filter_SubString();
+?>
+<div id="info" class="jcarousel-wrapper">
+	<div id="infolanguge" class="jcarousel">
+		<ul>
+		<?php foreach($this->countrys as $item){?>
+			<li>
+				<a href="<?php echo $this->baseUrl($this->translate('PROGRAM_ALIAS') . '-' . $multiFilter->filter($item['title'.$ssLang->key]).'.html'); ?>">
+					<img src="<?php echo UPLOAD_URL. '/country/' . $item['image']?>" width="88" height="81" />
+				</a>
+				<div class='title-country'><?php echo $item['title'.$ssLang->key];?></div>
+			</li>
+		<?php } ?>			
+		</ul>
+	</div>
+	<div id="infosupport">
+		<img src="images/support.jpg" width="411" height="106">
+	</div>
+</div>
+<div class="clearb"></div>
+<div id="content-home">
+	<div id="info2">
+		<div id="info2program">
+			<p style="font-size: 18px; font-weight: 700;">
+				NEW <span style="color: #0099c3;">PROGRAM</span>
+			</p>
+			<div class='program-new' id='sl_HotHome'>
+				<?php foreach($this->articleNew as $item){ ?>
+				<div id="item_HotHome" style="background: #fff !important;">
+					<div class='program-new-content'><?php echo $filterSubString->filter($item['intro'.$ssLang->key]); ?></div>
+					<span style="float: right; margin-left: 10px;"><img src="<?php echo UPLOAD_URL . '/article/small/' . $item['image']?>" width="238" height="108"></span>
+					<div class="readmorehome"><a href="<?php echo $this->baseUrl($item['alias'.$ssLang->key]).'-c'.$item['id'].'.html';?>">READ MORE PROGRAM</a></div>
+					<div class="apply"><a href="<?php echo $this->translate('APPLY_ALIAS').'.html';?>"><?php echo $this->translate('APPLY_NOW');?></a></div>
+				</div>
+				<?php } ?>
+			</div>
+		</div>
+		<div id="info2event">
+			<p style="font-size: 18px; font-weight: 700; background: #f2f2f2; text-align: center; padding: 3px; width: 150px; margin-bottom: 15px;">
+				LIST <span style="color: #0099c3;">EVENT</span>
+			</p>
+			<div class='event'>
+				<ul>
+					<?php 
+						foreach($this->event as $item){ 
+							echo '<li><a href="'.$item['alias'.$ssLang->key].'-e'.$item['id'].'.html">'.$item['title'.$ssLang->key].'</a><br> <span style="color: #6d6d6d;">'.$item['created'].'</span></li>';
+						} 
+					?>				
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div id="info3">
+	<?php
+		$i = 1; 
+		foreach ($this->articleCategory as $key => $article){
+	?>
+		<div id="<?php echo ($i % 2 == 0)?'info3inter':'info3study';?>">
+			<p style="font-size: 18px; font-weight: 700; padding-bottom: 0px; margin-bottom: 15px; border-bottom: 5px solid #dedede;text-transform: uppercase;"><?php echo $key?> PROGRAM</p>
+			<ul>
+			<?php foreach ($article as $item){ ?>
+				<li>
+					<img src="<?php echo $item['image'];?>" width="109" height="88"> 
+					<div class='title-article'><?php echo $item['title'.$ssLang->key];?></div> 
+					<img src="images/add1.png" width="16" height="14">&nbsp;<a href="<?php echo $item['alias'.$ssLang->key];?>" style="color: #0099C3;">Read more</a><br> <br> 
+					<a style="color: #f3ae09" href="<?php echo $this->translate('APPLY_ALIAS');?>">Applay Now <img src="images/icon-apply.jpg" width="14" height="14"></a>
+				</li>
+			<?php }?>				
+			</ul>
+		</div>
+	<?php
+		$i++; 
+		}
+	?>
+	</div>
+	<div class="clearb" style="border-top: 1px solid #f6f6f6; width: 990px;">
+		<br>
+		<br>
+	</div>
+	<div id="col1">
+		<p style="font-size: 18px; font-weight: bold; color: #989d9f;">TESTIMONIALS</p>
+		<?php foreach($this->testimonials as $item){ ?>
+		<p style="font-size: 18px;"><a href='<?php echo $item['alias'.$ssLang->key].'-e'.$item['id'].'.html';?>'><?php echo $item['title'.$ssLang->key];?></a></p>
+		<p>
+			<span style="float: right; margin-left: 10px;"><a href='<?php echo $item['alias'.$ssLang->key].'-e'.$item['id'].'.html';?>'><img src="images/image3.jpg" width="152" height="92"></a></span>
+			<?php echo $item['intro'.$ssLang->key];?>
+		</p>
+		<div class="clearb" style="border-top: 1px solid #f6f6f6; margin-top: 10px;">
+			<br> <br> <br>
+		</div>
+		<?php } ?>
+		
+	</div>
+	<div id="col2">
+		<p style="font-size: 18px; font-weight: bold; color: #989d9f;">IMPORTANT LINK</p>
+		<ul>
+			<?php 
+				foreach($this->links as $item){
+					echo '<li><a href="'.$item['url'.$ssLang->key].'">'.$item['title'.$ssLang->key].'</a></li>';			
+				} 
+			?>
+			
+		</ul>
+	</div>
+	<div id="col3">
+		<?php 
+			$partnerBlock = new Default_Blocks_Partner();
+			echo $partnerBlock->partner();
+		?>
+	</div>
+</div>

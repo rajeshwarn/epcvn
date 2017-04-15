@@ -1,0 +1,27 @@
+<?php 
+$ssLang = new Zend_Session_Namespace('ssLang'); 
+?>
+<?php 
+if($this->products != null){
+	foreach ($this->products as $item){ 
+?>
+<div classs='pro-panel'>
+	<div class="img-pro">
+		<a href="<?php echo BASE_URL. '/'. $this->translate('ALIAS_PRODUCT').'/'. $item['alias'. $ssLang->key]?>">
+			<img src="<?php echo UPLOAD_URL.'/products/'.PRODUCT_WIDTH_SMALL . 'x' .PRODUCT_HEIGHT_SMALL . '/' . $item['image']?>" alt="<?php echo $item['title'. $ssLang->key]?>" width="198" height="144" />
+		</a>
+	</div>
+	<div class='title-pro'><a href="<?php echo BASE_URL. '/'. $this->translate('ALIAS_PRODUCT').'/'. $item['alias'. $ssLang->key]?>"><?php echo $item['title'. $ssLang->key]?></a></div>
+	<div class='intro-pro'><?php echo $item['intro'. $ssLang->key]?></div>
+	<div class='readmore'><a href="<?php echo BASE_URL. '/'. $this->translate('ALIAS_PRODUCT').'/'. $item['alias'. $ssLang->key]?>"><?php echo $this->translate('READ_MORE');?></a></div>
+	<div class="clearb"><br /></div>
+</div>
+<?php 
+	} 
+	echo '<div align="center">';
+	echo $this->paginationControl($this->data,'Sliding','_partials/pagination.phtml');
+	echo '</div>';
+}else{
+	echo DATA_UPDATING;
+}
+?>

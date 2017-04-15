@@ -1,0 +1,31 @@
+<tr class="tblSkinRow">
+    <td align="center"><input type="checkbox" data-id='<?php echo $this->uid;?>' class='checkbox'/></td>
+    <td align="center"><?php echo $this->uid;?></td>
+    <td>
+        <a title="<?php echo $this->userName; ?>" href="/admin/user/edit/id/<?php echo $this->uid; ?>"><?php echo $this->userName; ?></a>
+    </td>
+    <td>
+      <?php echo $this->email; ?>
+    </td>
+    <td align="left">
+        <?php echo $this->fullname ?>
+    </td>
+    <td align="center">
+    	<?php echo $this->created ?>
+    </td>
+    <?php
+    if ($this->status == 1) {
+        echo '<td align="center"><div class="label label-sm label-success">Hoạt động</div></td>';
+    } else {
+        echo '<td align="center"><div class="label label-sm label-danger">Không hoạt động</div></td>';
+    }
+    ?>
+    <td align="center" style="width:100px;">
+        
+	<div class="visible-md visible-lg hidden-sm hidden-xs">
+		<a href="/admin/user/edit/id/<?php echo $this->uid; ?>" data-original-title="Cập nhật" data-placement="top" class="btn btn-xs btn-teal tooltips" href="#"><i class="icon-edit"></i></a>
+		<a href="/admin/user/delete/id/<?php echo $this->uid; ?>" data-original-title="Xoá" data-placement="top" class="btn btn-xs btn-bricky tooltips" data-id="<?php echo $this->id; ?>" onclick="return confirm('Do you want to delete ?')"><i class="icon-remove icon-white"></i></a>
+	</div>											
+    </td>
+
+</tr> 

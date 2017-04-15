@@ -1,0 +1,74 @@
+@charset "utf-8";
+/*	Feuille de style de base, avec initialisation 
+	des principaux lments HTML.
+----------------------------------------------------------*/
+* { outline:0; font-weight:inherit; font-style:inherit; font-size:100%; vertical-align:baseline; margin:0; padding:0;}
+html, body { text-align:center; height:100%; }
+h1 { padding:.5em 0 1em; }
+h2 { padding:.83em 0; }
+h3 { padding:1em 0; }
+h4 { padding:1.33em 0; }
+h5 { padding:1.67em 0; }
+h6 { padding:2.33em 0; }
+p { margin:0; padding:0 0 1em 0; line-height: 1.6; }
+ul, ol { list-style:disc outside; margin:0; padding:0 0 0 1em; }
+li { line-height:1.4em; }
+dl { padding:1em 0 0 0; }
+dd { padding-left:1.5em; }
+img { border:none; vertical-align:text-top; }
+code, pre { font-size:1.1em; }
+table { width:100%; border-collapse:collapse; }
+th { border-bottom:0 solid; white-space:nowrap; }
+td { border-width:0; }
+input { font-family:inherit; /*width:100px; height:1.3em;*/ }
+acronym { cursor:help; }
+textarea { font-family:inherit; }
+
+/*	Structure de la page.
+----------------------------------------------------------*/
+body {  }
+
+#page { margin:0 auto; width:1030px; box-shadow:0 210px 6px #054708; }
+#head { height:144px; position: relative;} 
+
+#principale { width:100%; background:#FFF; padding-top:20px; }
+
+#colleft { float:left; text-align:left; width:244px; background:#FFF; margin-left:15px;border: 1px solid #E7E7E7; }
+#centre { text-align:justify; float:left; width:768px; }
+#titre { height:37px; } 
+#contenu { padding:10px 20px 10px; }
+#colonneDroite { float:left; text-align:left; width:150px; }
+
+/* Adresse
+----------------------------------------------------------*/
+#adresse { text-align:center; background: #F9F9F9 url(../images/bg-address.jpg) repeat-x; height:240px; }
+
+#liens_bas { padding-top:15px; }
+
+#validator a img { filter:alpha(opacity=50); opacity:.5; margin-right:2em; }
+#validator a:hover img { filter:alpha(opacity=100); opacity:1; }
+.clearvalidator{ clear:both; height:3px;}
+
+/*	Formulaire de contact
+----------------------------------------------------------*/
+#formulaire { width:470px; }
+#formulaire input, #formulaire textarea{ background-color:transparent; border:#010101 solid 1px; }
+#formulaire .champ { height:15px; width:200px; }
+#formulaire .champmessag { }
+#formulaire .INPUT2{ border:none;}
+#formulaire .field{ text-align:right; margin-top:10px; }
+
+/*#formulaire{ width:790px; }
+.divformulaire{ width:480px; float:left; padding-right:10px;}
+#divmessage{ width:300px; float:left; padding-top:40px;}
+#formulaire input, #formulaire textarea{ background-color:transparent; padding:5px; border:#b36a08 solid 1px; }
+#formulaire .INPUT2{ border:none;}
+#formulaire .field{ text-align:right; padding-top:10px; }
+#formulaire .champ { height:15px; width:200px; }
+#formulaire textarea{ height:170px; width:250px; }*/
+
+#coordonnees { text-align:center; }
+#coordonnees h3 { text-align:center; }
+
+/*	Fin du formulaire de contact
+----------------------------------------------------------*/

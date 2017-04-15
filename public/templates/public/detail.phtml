@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+        <?php echo $this->headTitle();?>
+        <?php echo $this->headMeta();?>
+        <?php echo $this->headLink(); ?>	
+        <?php echo $this->headScript();?>
+        
+        <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_EN/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-55126283-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</head>
+<body>
+	<div id="wapper-all">
+		<div id="wapper-header">
+			<?php $config = Zend_Registry::get('config');?>
+			<div class="social" style="border: none;position: absolute;bottom: 20px;right: 25px;">
+				<p>
+					<a href='<?php echo $config['pageFacebook'];?>' rel="nofollow" title='Facebook'>
+					<img src="<?php echo TEMPLATE_URL.'/public/images/f-icon.png';?>" width="33" height="33">&nbsp;
+					</a>
+					<a href='<?php echo $config['pageGoogle'];?>' rel="nofollow" title='Google+'>
+						<img src="<?php echo TEMPLATE_URL.'/public/images/g-icon.png';?>" width="33" height="33">&nbsp;
+					</a>
+					<a href='<?php echo $config['pageTwitter'];?>' rel="nofollow" title='Twitter'>
+						<img src="<?php echo TEMPLATE_URL.'/public/images/t-icon.png';?>" width="33" height="33">&nbsp;
+					</a>				
+					<a href='<?php echo $config['pageLinkein'];?>' rel="nofollow" >
+						<img src="<?php echo TEMPLATE_URL.'/public/images/in-icon.png';?>" width="35" height="35">&nbsp;
+					</a>
+				</p>
+			</div>
+		</div>
+		<div class="clearb"></div>
+		<?php
+			$menuTopBlock = new Default_Blocks_MenuTop();
+			echo $menuTopBlock->menuTop(); 
+		?>
+		<div class="clearb"></div>
+		<div id="colright">
+		<?php 
+			$menuBlock = new Default_Blocks_Menu();
+			echo $menuBlock->menu();
+		?>
+		<div class="clearb"><br /><br /></div>
+		<?php 
+			$partnerBlock = new Default_Blocks_Partner();
+			echo $partnerBlock->partner();
+		?>
+		</div>
+		<div id="content">
+			
+			<div class="clearb"><br /></div>
+			<?php echo $this->layout()->content; ?> 
+		</div>
+		<div class="clearb"></div>
+		<?php 
+			$footerBlock = new Default_Blocks_Footer();
+			echo $footerBlock->footer();
+		?>
+	</div>
+	<div class="language">
+        <div class="box-social">
+            <div id="fb-root"></div>
+            <script>
+                (function(d, s, id){
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) return;
+                    js = d.createElement(s); js.id = id;
+                    js.src = "//connect.facebook.net/en_EN/all.js#xfbml=1";
+                    fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));
+            </script>
+            <div class="fb-like" data-href="<?php echo BASE_URL;?>" data-layout="button_count" data-action="like" data-show-faces="true"></div>
+        </div>
+        <div class="box-social">
+            <script type="text/javascript">
+                window.___gcfg = {lang: "vi"};    
+                (function(){
+                    var po = document.createElement("script"); po.type = "text/javascript"; po.async = true;
+                    po.src = "https://apis.google.com/js/plusone.js";
+                    var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(po, s);
+                })();
+            </script>
+            <g:plusone size="medium"></g:plusone>
+        </div>
+    </div>
+</body>
+</html>

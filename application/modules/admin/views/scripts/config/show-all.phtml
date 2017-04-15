@@ -1,0 +1,79 @@
+<div class='toolbar' align="right">
+	
+</div>
+<div class="row">
+	<div class="col-md-12">		
+		<div class="panel panel-default">	
+			<div class="panel-heading">
+				<i class="icon-external-link-sign"></i> Configs
+				<div class="panel-tools">
+					<a class="btn btn-xs btn-link panel-collapse collapses" href="#"> </a> <a class="btn btn-xs btn-link panel-config" href="#panel-config" data-toggle="modal"> <i class="icon-wrench"></i>
+					</a> <a class="btn btn-xs btn-link panel-expand" href="#"> <i class="icon-resize-full"></i>
+					</a> <a class="btn btn-xs btn-link panel-close" href="#"> <i class="icon-remove"></i>
+					</a>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="row" style="float: left;margin-left: 0px">
+				<form action="" Method="post">
+					<div class="row-md-5" style="float: left">
+						<div class="form-group" style="width: 195px;">
+					<?php 
+						$keyword = new Zend_Form_Element_Text('s_keyword');
+						$keyword->addFilter('StringTrim')
+						->setRequired(true)
+						->addValidator('NotEmpty')
+						->setAttrib('class', 'form-control')
+						->setAttrib('placeholder', 'Enter a keyword to search ...')
+						->setValue($this->keyword)
+						->setDecorators(array('ViewHelper'));
+						echo $keyword;
+					?>
+						</div>
+					</div>
+					<div class="row-md-1" style="float: left; padding-left: 10px">
+		             	<div class="form-group">
+		             	<input type="submit" class="form-control" value="Search" style="width: 96px"/>
+		             	</div>
+		             </div>
+				</form>
+				</div>
+				<table class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>			
+							<th width='30px;'><input type="checkbox" id="check-all" class="checkall"></th>     
+			                <th width='50px;'>ID</th>
+			                <th width='200px;'>Name</th>       
+			                <th width='400px;'>Value</th>
+			                <th width='80px;'>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+						if ($this->data != null) {
+							echo $this->partialLoop ( "_partials/{$this->controllerName}/list.phtml", $this->data );
+						} else {
+							echo '<tr class = "tblSkinRow"><td colspan = "15"><div class = "empty-data">Data no found!</div></td></tr>';
+						}
+						?>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- end: BASIC TABLE PANEL -->
+	</div>
+</div>
+<div align="center">
+<?php echo $this->paginationControl($this->data,
+                                    'Sliding',
+                                    '_partials/pagination.phtml'); ?>
+</div>
+<script type="text/javascript" language="javascript">
+    $(document).ready(function() {
+    	updateStatusClick('.status', "ajax-edit-feature/", 'status');
+    	updateStatusClick('.isDetailProduct', "ajax-edit-feature/", 'isDetailProduct');
+    	updateElementChange('.txtWeight', "ajax-edit-feature/", 'weight');
+    	removeElementClick('.delete-category', 'ajax-delete-feature/', 'REMOVE_ROW');
+    	removeAllClick('.delete-all-category', 'ajax-delete/', 'REMOVE_ALL');          
+    });
+</script>

@@ -1,0 +1,58 @@
+
+<div class='toolbar' align="right">
+	<a class="btn btn-primary" href="<?php echo $this->url(array('controller' => $this->controllerName, 'action' => 'add')) ?>"><i class="icon-plus"></i> Thêm</a>
+	<a href="remove-all" class="btn btn-bricky" onclick="return confirm('Bạn có muốn xóa không ?')" ><i class="icon-trash"></i> Xóa tất cả</a>
+	<!--
+	<a class="btn btn-green" href="/admin/category/trash"><i class="icon-trash"></i> Thùng rác</a>
+	-->
+</div>
+<div class="row">
+	<div class="col-md-12">		
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<i class="icon-external-link-sign"></i> Danh mục sản phẩm
+				<div class="panel-tools">
+					<a class="btn btn-xs btn-link panel-collapse collapses" href="#"> </a> 
+					<a class="btn btn-xs btn-link panel-expand" href="#"> <i class="icon-resize-full"></i>
+					</a> <a class="btn btn-xs btn-link panel-close" href="#"> <i class="icon-remove"></i>
+					</a>
+				</div>
+			</div>
+			<div class="panel-body">
+				<table class="table table-hover" id="sample-table-1">
+					<thead>
+						<tr>							
+							<th>Tên danh mục</th>
+							<?php if (VIETNAM == 1) { ?>
+							<th>Tên danh mục (Tiếng anh)</th>
+							<?php } ?>     
+							<th class="hidden-xs">Thứ tự</th>
+							<th class="hidden-xs">Trạng thái</th>
+							<th>Thao tác</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+						if ($this->category != NULL) {
+							echo $this->partialLoop ( "_partials/{$this->controllerName}/list.phtml", $this->category );
+						} else {
+							echo '<tr class = "tblSkinRow"><td colspan = "15"><div class = "empty-data">Không tìm thấy dữ liệu!</div></td></tr>';
+						}
+						?>
+						
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- end: BASIC TABLE PANEL -->
+	</div>
+</div>
+
+<script type="text/javascript" language="javascript">
+    $(document).ready(function() {
+    	updateStatusClick('.status', "ajax-edit-category/", 'status');
+    	updateElementChange('.txtWeight', "ajax-edit-category/", 'weight');
+    	removeElementClick('.remove-item', 'ajax-remove-category/', 'REMOVE_ROW');
+    	removeElementClick('.remove-all', 'ajax-remove-category/', 'REMOVE_ALL');          
+    });
+</script>

@@ -1,0 +1,18 @@
+<tr class="tblSkinRow">
+    <td align="center"><input type="checkbox" data-id='<?php echo $this->id;?>' class='checkbox'/></td>
+    <td align="center"><?php echo $this->id;?></td>
+    <td>
+        <a title="<?php echo $this->description; ?>" href="/admin/config/edit/id/<?php echo $this->id; ?>"><?php echo $this->description; ?></a>
+    </td>
+
+    <td align="left">
+        <?php echo $this->value ?>
+    </td>
+    <td align="center" style="width:100px;">
+        
+	<div class="visible-md visible-lg hidden-sm hidden-xs">
+		<a href="/admin/config/edit/id/<?php echo $this->id; ?>" data-original-title="Update" data-placement="top" class="btn btn-teal tooltips" href="#"><i class="icon-edit"></i></a>
+	</div>											
+    </td>
+
+</tr> 

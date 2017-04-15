@@ -1,0 +1,159 @@
+<?php
+if (isset($this->popupMessage)) {
+    echo $this->popupMessage;
+}
+
+$arrInput = array(
+    1 => array('label' => 'Value: ', 'input' => $this->form->value, 'requited' => 'NO'),
+);
+
+ksort($arrInput);
+?>
+
+<form role="form" class='form-horizontal' novalidate="novalidate" action='' method="post" enctype="multipart/form-data" onsubmit="return checkForm()">
+	<div class="row">
+		<div class="col-md-12">
+			<!-- start: FORM VALIDATION 1 PANEL -->
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<i class="icon-external-link-sign"></i>				
+				</div>
+				<div class="panel-body">
+					<div class="tabbable panel-tabs">
+						<ul class="nav nav-tabs">
+							<li class="active"><a data-toggle="tab" href="#panel_tab_example1">Gerenal information</a>
+							</li>				
+						</ul>
+									
+						<div class="tab-content">
+							<div class="col-md-12">
+								<div id="alert-message"></div>							
+					            <?php if (isset($this->error) && $this->error != '') { ?>
+								<div class="errorHandler alert alert-danger">
+									<i class="icon-remove-sign"></i> Message
+									<ul>
+				                        <?php
+					                        foreach ($this->error as $item) {
+					                            echo '<li>' . $item . '</li>';
+					                        }
+				                        ?>
+				                    </ul>
+								</div>
+								<?php } ?>
+								
+								<div class="successHandler alert alert-success no-display">
+									<i class="icon-ok"></i> Your form validation is successful!
+								</div>
+							</div>
+							<div id="panel_tab_example1" class="tab-pane active">											
+								<?php echo $this->partialLoop("_partials/row.phtml", $arrInput); ?>  														
+							</div>
+							<div id="panel_tab_example2" class="tab-pane">											
+								<div class="row">	
+									<div class="col-md-12" id='featureDetail'></div>
+								</div>
+								<div class="row">	
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="col-sm-2 control-label"></label>	
+											<div class="col-sm-9" id='image-attr'></div>											
+										</div>
+									</div>
+								</div> 														
+							</div>
+						</div>
+					</div>					
+					
+					<div class="row">
+						<div class="col-md-12">
+							<div><hr></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-9">
+							<p>Fields with <span class="symbol required"></span> are required</p>
+						</div>
+						<div class="col-md-3">
+							<a data-style="expand-left" class="btn btn-teal ladda-button" href='<?php echo $this->url(array('module' => 'admin', 'controller' => $this->controllerName, 'action'=>'index')); ?>'>								
+								<i class="icon-circle-arrow-left"></i><span class="ladda-label"> Cancel </span>
+								<span class="ladda-spinner"></span>
+							</a>
+							<button type="submit" data-style="expand-right" name='btnSave' class="btn btn-teal ladda-button">
+								<span class="ladda-label"> Save </span>
+								<i class="icon-circle-arrow-right"></i>
+								<span class="ladda-spinner"></span>
+							</button>
+						</div>
+						
+					</div>					
+				</div>
+			</div>
+			<!-- end: FORM VALIDATION 1 PANEL -->
+		</div>
+	</div>
+</form>
+
+<script type="text/javascript">
+    function checkForm() {
+        var error = true;
+        var stError = '';
+        if ($('#tbvalue').val() === '') {
+            stError += '<li>Value is not empty</li>';
+            $(tbvalue).addClass('required-error');
+            error = false;
+        } else {
+            $('#tbvalue').removeClass('required-error');
+        }
+        //alert($('input[name=itemSelected]:checked').val()); return false;
+        /*
+        if ($('input[name=itemSelected]').is(":checked") === false) {
+            stError += '<li>Chưa chọn hình đại diện</li>';
+            $('#itemSelected').addClass('required-error');
+            error = false;
+        } else {
+            $('#itemSelected').removeClass('required-error');
+        }
+        */
+        
+        if (!error) {
+            $('.errorHandler').remove();
+            $('#alert-message').html('<div class="errorHandler alert alert-danger"><button data-dismiss="alert" class="close" type="button">×</button><i class="icon-remove-sign"></i> Message</div>');
+            $('.errorHandler').append('<ul>' + stError + '</ul>');
+            $('#alert-message').fadeIn();
+        }
+
+        return error;
+    }
+	
+	$(document).ready(function(){
+		$('#tbvalue').keyup(function(){	
+			var $this = $(this);
+			var value = $(this).val();
+			var pre = value.substring(0,7);
+			var pre2 = value.substring(0,8);
+			
+			if(pre == 'http://'){
+				var valueNew = value.substr(7);
+				var inputPre = '<input type="hidden" name="pre" value="1">';
+				$(this).val(valueNew);
+				
+				if($this.next().length > 0){
+					$this.next().remove();					
+				}
+				
+				$(this).after(inputPre);
+			}
+			if(pre2 == 'https://'){
+				var valueNew = value.substr(8);
+				var inputPre = '<input type="hidden" name="pre" value="2">';
+				$(this).val(valueNew);
+				
+				if($this.next().length > 0){
+					$this.next().remove();					
+				}
+				
+				$(this).after(inputPre);
+			}			
+		});
+	});
+</script>

@@ -1,0 +1,11 @@
+<div class="form-group">
+	<label class="col-sm-2 control-label" for="form-field-1"> 
+	<?php echo $this->label; ?>
+	<?php if($this->requited === 'YES'){?>
+		<span class="symbol required"></span>
+	<?php } ?> 
+	</label>
+	<div class="col-sm-9">
+		<?php echo $this->input; ?>
+	</div>
+</div>

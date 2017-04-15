@@ -1,0 +1,40 @@
+<?php 
+$translate = Zend_Registry::get('Zend_Translate');
+
+$uri = Zend_Controller_Front::getInstance()->getRequest()->getRequestUri();
+$tmp = explode('?', $uri);
+$url = $tmp[0];
+?>
+
+<ul class="pagination pagination-sm">
+    <!-- First page link -->
+    <?php if (isset($this->previous)): ?>
+         <li class="first"><a href="<?php echo $url.'?page='.$this->first; ?>"><?php echo $translate->translate('FIRST')?></a></li>
+    <?php else: ?>
+         <li class="first"><a href="#"><?php echo $translate->translate('FIRST')?></a></li>
+    <?php endif; ?>
+
+    <!-- Previous page link -->
+    <?php if (isset($this->previous)): ?>
+         <li class="prev"><a href="<?php echo $url.'?page='.$this->previous; ?>"> << </a></li>
+    <?php endif; ?>   
+    <!-- Numbered page links -->
+    <?php foreach ($this->pagesInRange as $page): ?>
+        <?php if ($page != $this->current): ?>
+            <li><a href="<?php echo $url.'?page='.$page; ?>"><?php echo $page; ?></a></li>
+        <?php else: ?>
+            <li class="active"><a href="#"><?php echo $page; ?></a></li>
+        <?php endif; ?>
+    <?php endforeach; ?>
+
+    <!-- Next page link -->
+    <?php if (isset($this->next)): ?>
+           <li class="next"><a href="<?php echo $url.'?page='.$this->next; ?>"> >> </a></li>
+	<?php endif; ?> 
+    <!-- Last page link -->
+    <?php if (isset($this->next)): ?>
+          <li class="first"><a href="<?php echo $url.'?page='.$this->last; ?>"><?php echo $translate->translate('LAST')?></a></li>
+    <?php else: ?>
+        <li class="first"><a href="#"><?php echo $translate->translate('LAST')?></a></li>
+    <?php endif; ?>
+    </ul>

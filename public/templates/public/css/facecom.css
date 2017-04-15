@@ -1,0 +1,305 @@
+@charset "utf-8";
+/* Import de la CSS d'initialisation
+----------------------------------------------------------*/
+@import url(structure.css);
+
+/* Construction (Montage)
+----------------------------------------------------------*/
+body { color:#000; background:#5cc150 url(../images/bg-wide.jpg) top repeat-x; font-size:12px; font-family: Arial, "Trebuchet MS", helvetica, "Bitstream Vera Sans", sans-serif; }
+
+h1, h2, h3, h4, h5, h6 { color:#000; }
+h1 { font-weight:700; font-size:1.1em; }
+h2 { font-weight:700; font-size:1.3em; }
+h3 { font-weight:700; font-size:1.17em; }
+h4 { font-weight:700; font-size:1em; }
+h5 { font-size:.83em; }
+h6 { font-size:.67em; }
+p, ul, ol, li { font-size:1em; }
+a { color:#000; text-decoration:underline; }
+a:hover { text-decoration:none; } /* si changement de couleur au survol */
+textarea { color:#000; padding:3px; }
+input { color:#000; padding:3px; }
+
+/* Intro */
+#intro h1 { color:#000; } /* couleur du h1 de l'intro */
+#intro p, #intro a { color:#000; } /* couleur du texte de l'intro */
+#intro p { font-size:.9em; }
+
+/* Adresse : Liens de bas de page
+----------------------------------------------------------*/
+#adresse p, #adresse a { color:#000; } /* couleur des liens de bas de page */
+#adresse p { font-size:.9em; }
+
+/* Image de validation W3C
+----------------------------------------------------------*/
+/*#validator a img { background-color:#000; } - Activer le CSS si le fond du site est blanc */
+
+
+/* Éléments Particuliers
+----------------------------------------------------------*/
+/* Placement d'images */
+.imgLeft { float:left; padding-bottom:0; margin:0 2em 0 0; /*border:1px solid #000;*/ }
+.imgRight { float:right; padding-bottom:0; margin:0 0 0 2em; /*border:1px solid #000;*/ }
+
+/* Des classes d'alignement d'objets */
+.aligntop { vertical-align:top; }
+.alignbottom { vertical-align:bottom; }
+.aligncenter { margin-left:auto; margin-right:auto; }
+.left { text-align:left; }
+.right { text-align:right; }
+.center { text-align:center; }
+.justify { text-align:justify; }
+
+/* Des classes de formatage du texte en ligne */
+em, .italic, .italique { font-style:italic; }
+strong, .bold, .gras { font-weight:700; }
+.strike, .barre { text-decoration:line-through; }
+.souligne { text-decoration:underline; }
+.br { display:block; }
+
+/* Des classes flotante */
+.floatleft { float:left; }
+.floatright { float:right; }
+
+/* Les "nettoyeurs" */
+.clearb { clear:both; }
+.clearer { clear:both; width:0; height:0; line-height:0; }
+
+
+/*	Mise en page
+----------------------------------------------------------*/
+
+/*	Page d'accueil
+----------------------------------------------------------*/
+/*h1#chapeau { padding:1em 0 2em; }*/ 
+.illustration { float:left; padding:0 2em 30px 0; margin-top:20px; }
+/*#p_accueil { margin-top:.5em; } - Activer pour descendre le 1er paragraphe */
+
+/*	Site en cours de réalisation
+----------------------------------------------------------*/
+#site { text-align:center; padding-top:5em; }
+
+/*	Mentions Légales
+----------------------------------------------------------*/
+#infoclient {  margin-bottom:1.7em; }
+#hebergeur { margin-bottom:1.5em; float:right;}
+.bg-navi
+{
+	width:1030px;
+	height:66px;
+	background:url(../images/bg-navi0.png) bottom no-repeat;
+}
+.navigation
+{
+	height:56px;
+	background:url(../images/bg-navi.png) top repeat-x;
+
+}
+.navigationleft
+{
+	height:56px;
+	width:958px;
+	background:url(../images/bg-navileft.png) left no-repeat;
+	padding-left:30px;
+}
+.navigationright
+{
+	height:56px;
+	width:968px;
+	background:url(../images/bg-naviright.png) right no-repeat;
+	padding-right:30px;
+	
+}
+.navigation ul
+{
+	float:left;
+	width:1014px;
+}
+.navigation ul li
+{
+	height:56px;
+	line-height:55px;
+	list-style:none;
+	float:left;
+	background:url(../images/li-border.png) right no-repeat;
+	width:110px;
+	text-transform: uppercase;
+		
+}
+.navigation ul li:hover
+{
+	height:56px;
+	line-height:55px;
+	list-style:none;
+	float:left;
+	background: url(../images/li-hover.png)  repeat-x;
+	width:110px;
+	text-transform: uppercase;
+}
+.navigation ul li.lasted
+{
+	height:56px;
+	line-height:55px;
+	list-style:none;
+	float:left;
+	background: none;
+		
+}
+.navigation ul li.lasted:hover
+{
+	height:56px;
+	line-height:55px;
+	list-style:none;
+	float:left;
+	background: url(../images/li-hover.png)  repeat-x;
+	
+	
+}
+.navigation ul li a
+{
+	text-decoration:none;
+	color:#474747;
+	font-weight:bold;
+	font-size:12px;
+display: block;
+}
+.navigation ul li a:hover
+{
+	
+	text-decoration:none;
+	color:#fff;
+	font-weight:bold;
+}
+#slide
+{
+	width:1030px;
+	height:436px;
+	background:url(../images/bg-slide.jpg) bottom no-repeat;
+}
+#colleft-title1
+{
+	width:234px;
+	height:43px;
+	background: url(../images/bg-title1.jpg) no-repeat;
+	text-align: center;
+	color:#fff;
+	line-height:33px;
+	font-weight:bold;
+	padding-right:10px;
+	text-transform: uppercase;
+}
+#colleft-title2
+{
+	width:234px;
+	height:43px;
+	background: url(../images/bg-title2.jpg) no-repeat;
+	text-align: center;
+	color:#fff;
+	line-height:33px;
+	font-weight:bold;
+	padding-right:10px;
+	text-transform: uppercase;
+}
+#colleft-title3
+{
+	width:234px;
+	height:43px;
+	background: url(../images/bg-title3.jpg) no-repeat;
+	text-align: center;
+	color:#fff;
+	line-height:33px;
+	font-weight:bold;
+	padding-right:10px;
+	text-transform: uppercase;
+}
+#colleft-title4
+{
+	width:234px;
+	height:43px;
+	background: url(../images/bg-title4.jpg) no-repeat;
+	text-align: center;
+	color:#fff;
+	line-height:33px;
+	font-weight:bold;
+	padding-right:10px;
+	text-transform: uppercase;
+}
+#colleft-title5
+{
+	width:234px;
+	height:43px;
+	background: url(../images/bg-title5.jpg) no-repeat;
+	text-align: center;
+	color:#fff;
+	line-height:33px;
+	font-weight:bold;
+	padding-right:10px;
+	text-transform: uppercase;
+}
+.bg-menu
+{
+	background:url(../images/bg-1.jpg) repeat-x;
+}
+#colleft ul
+{
+	padding:0 10px;
+	margin-bottom:10px;
+}
+#colleft ul li
+{
+	list-style:none;
+	text-align:left;
+	
+	height:25px;
+	padding-left:5px;
+	line-height:25px;
+}
+#colleft ul li:hover
+{
+	
+}
+#colleft ul li a
+{
+	text-decoration:none;
+	color:#000000;
+	font-size:12px;
+	font-weight:bold;
+	
+	
+}
+#colleft ul li a:hover
+{
+	color:#1eb726;
+}
+.img-pro
+{
+	width:198px;
+	height:144px;
+	float:left;
+	border:5px solid #f5f5f5;
+	margin-right:10px;
+}
+#menufoot
+{
+	height: 50px;
+    margin: 0 auto;
+    padding-top: 20px;
+    width: 600px;
+}
+#menufoot ul li
+{
+	list-style:none;
+	float:left;
+	text-transform: uppercase;
+}
+#menufoot ul li a
+{
+	color:#333;
+	text-decoration:none;
+	padding:0 10px;
+	font-weight:bold;
+}
+#menufoot ul li a:hover
+{
+	color:#1eb726
+}

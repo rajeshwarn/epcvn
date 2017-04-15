@@ -1,0 +1,21 @@
+<tr id="item-<?php echo $this->id;?>">
+	<td><a id='username' title="<?php echo $this->titleEn;?>" href="/admin/category-article/edit/id/<?php echo $this->id;?>"><?php echo $this->CreateSymbol($this->level).$this->titleEn;?></a></td>
+	<?php if(VIETNAM == 1){?>
+    <td><a title="<?php echo $this->titleVi;?>" href="/admin/category-article/edit/id/<?php echo $this->id;?>"><?php echo $this->CreateSymbol($this->level).$this->titleVi;?></a></td>
+    <?php } ?>
+    <td align="center"><input name="" type="text" class='txtWeight' data-id="<?php echo $this->id;?>" value="<?php echo $this->weight;?>" style="width: 80%;" /></td>
+    <?php
+		if ($this->status == 1) {
+			echo '<td class="hidden-xs"><span class="label label-sm label-success status" data-id="'.$this->id.'" data-value="0">Hoạt động</span></td>';
+		} else {
+			echo '<td class="hidden-xs"><span class="label label-sm label-danger status" data-id="'.$this->id.'" data-value="1">Không hoạt động</span></td>';
+		}
+	  ?>
+	
+	<td class="center">
+		<div class="visible-md visible-lg hidden-sm hidden-xs">
+			<a href="/admin/category-article/edit/id/<?php echo $this->id;?>" class="btn btn-xs btn-teal tooltips" data-placement="top" data-original-title="Cập nhật"><i class="icon-edit"></i></a> 
+			<a class="btn btn-xs btn-bricky tooltips remove-item" data-placement="top" data-original-title="Xóa" onclick="return confirm('Bạn có muốn xóa không ?')"><i class="icon-remove icon-white"></i></a>
+		</div>		
+	</td>
+</tr>

@@ -1,0 +1,30 @@
+<tr class="tblSkinRow">
+    <td align="center"><input type="checkbox" data-id='<?php echo $this->id;?>' class='checkbox'/></td>
+    <td align="center"><?php echo $this->id;?></td>
+   
+    <td>
+        <a target='_blank' href="<?php echo $this->youtube; ?>"><?php echo $this->youtube; ?></a>
+    </td>
+    <td align="center">
+        <?php echo $this->code ?>
+    </td>
+    
+    <td>
+    	<input name="" type="text" class='txtOrder' data-id="<?php echo $this->id; ?>" value="<?php echo $this->weight; ?>" style="width:80%;" />
+    </td>
+    <?php
+    if ($this->status == 1) {
+        echo '<td align="center"><div class="label label-sm label-success">Hoạt động</div></td>';
+    } else {
+        echo '<td align="center"><div class="label label-sm label-danger">Không hoạt động</div></td>';
+    }
+    ?>
+    <td align="center" style="width:100px;">
+        
+	<div class="visible-md visible-lg hidden-sm hidden-xs">
+		<a href="/admin/video/edit/id/<?php echo $this->id; ?>" data-original-title="Cập nhật" data-placement="top" class="btn btn-xs btn-teal tooltips" href="#"><i class="icon-edit"></i></a>
+		<a href="/admin/video/delete/id/<?php echo $this->id; ?>" data-original-title="Xóa" data-placement="top" class="btn btn-xs btn-bricky tooltips" data-id="<?php echo $this->id; ?>" onclick="return confirm('Bạn có muốn xóa không?')"><i class="icon-remove icon-white"></i></a>
+	</div>											
+    </td>
+
+</tr> 

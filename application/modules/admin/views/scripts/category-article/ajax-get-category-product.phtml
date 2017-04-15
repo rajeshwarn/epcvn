@@ -1,0 +1,7 @@
+<?php
+if ($this->category != null) {
+	echo '<div class="category-box catChild"><div class="close-cat clip-close-4"></div>';	
+    echo $this->formSelect('categoryId[]', null, array('size' => 10, 'class'=>'categoryIdProduct form-control'), $this->category);
+    echo '</div>';
+}
+?>

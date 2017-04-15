@@ -1,0 +1,30 @@
+<script type="text/javascript">
+var google_tag_params = {
+local_id: 'REPLACE_WITH_VALUE',
+local_pagetype: 'REPLACE_WITH_VALUE',
+local_totalvalue: 'REPLACE_WITH_VALUE',
+};
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 995415630;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/995415630/?value=0&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+<?php 
+$ssLang = new Zend_Session_Namespace('ssLang'); 
+?>
+
+<div class='content-detail'>
+	<h1><?php echo $this->article['title'.$ssLang->key]?></h1>
+	<div class='content-pro'><?php echo $this->article['content'.$ssLang->key]?></div>
+</div>
